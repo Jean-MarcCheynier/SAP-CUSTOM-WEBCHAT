@@ -117,9 +117,12 @@ class App extends Component {
   }
 
   changeLang (lang) {
-    console.log('Lang is %s', lang)
+    console.log('Lang is %s', lang);
+    console.log(this.state.expanded);
     this.setState({ lang })
-    this.toggleChat();
+    if(!this.state.expanded){
+      this.toggleChat();
+    }
 
     this.props.removeAllMessages();
   }
