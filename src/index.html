@@ -25,7 +25,21 @@
 
   <body>
     <div class="container">
-      <button id="button" class="btn btn-primary">Change Lang -> DE</button>
+      <form id="form">
+        <div class="form-group">
+          <label for="inputLang">Bot's language</label>
+          <select name="lang" class="custom-select">
+            <option disabled selected>Select language</option>
+            <option value="en">English</option>
+            <option value="de">German</option>
+            <option value="fr">French</option>
+          </select>
+          <small id="langHelp" class="form-text text-muted">Choose bot's language</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Change Lang </button>
+      </form>
+
+
     </div>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -41,8 +55,12 @@
     >
     </script>
     <script>
-      $("#button").on("click", e => {
-        CaiWebchat.changeLang('de')
+      $( "#form" ).on('submit', function( event ) {
+        let data =  $( this ).serializeArray();
+        if(data[0] && data[0].name === "lang"){
+          CaiWebchat.changeLang(data[0].value)
+        }
+        event.preventDefault();
       });
     </script>
     <!--

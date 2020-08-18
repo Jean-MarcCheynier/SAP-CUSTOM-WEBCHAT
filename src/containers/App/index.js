@@ -31,7 +31,6 @@ class App extends Component {
     this.state = {
       expanded: this.props.expanded || false,
       isReady: null,
-      lang: 'default',
     }
     this.changeLang = this.changeLang.bind(this);
     (window.CaiWebchat = window.CaiWebchat || {}).changeLang = this.changeLang
@@ -120,6 +119,9 @@ class App extends Component {
   changeLang (lang) {
     console.log('Lang is %s', lang)
     this.setState({ lang })
+    this.toggleChat();
+
+    this.props.removeAllMessages();
   }
 
   toggleChat = () => {
@@ -156,7 +158,7 @@ class App extends Component {
       defaultMessageDelay,
       readOnlyMode,
     } = this.props
-    const { expanded } = this.state
+    const { expanded, lang } = this.state
 
     return (
       <div className='RecastApp CaiApp'>
@@ -179,6 +181,7 @@ class App extends Component {
         />
 
         <Chat
+          lang={lang}
           show={expanded}
           closeWebchat={this.toggleChat}
           preferences={preferences}

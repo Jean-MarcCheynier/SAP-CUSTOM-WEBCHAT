@@ -6,6 +6,7 @@ import propOr from 'ramda/es/propOr'
 import concat from 'ramda/es/concat'
 import { storeCredentialsToLocalStorage } from 'helpers'
 import { createConversation } from 'actions/conversation'
+import config from 'config'
 
 import {
   postMessage,
@@ -85,7 +86,7 @@ class Chat extends Component {
 
   componentDidUpdate (prevProps) {
     const { messages, show } = this.state
-    const { getLastMessage, removeAllMessages, conversationHistoryId, loadConversationHistoryPromise } = this.props
+    const { getLastMessage, removeAllMessages, conversationHistoryId, loadConversationHistoryPromise, lang } = this.props
 
     if (show && !this.props.sendMessagePromise && !this._isPolling) {
       this.doMessagesPolling()
@@ -93,6 +94,17 @@ class Chat extends Component {
     if (show && prevProps.conversationHistoryId !== conversationHistoryId && loadConversationHistoryPromise) {
       removeAllMessages()
       loadConversationHistoryPromise(conversationHistoryId).then(this.loadConversation)
+    }
+    if( prevProps.lang !== lang ){
+      let prevLang = prevProps.lang || config.conversations.defaultLang;
+      console.log("Default %s", config.conversations.defaultLang)
+      console.log(prevProps);
+      let question = config.conversations.changeLang[prevLang].replace('%s', config.conversations.lang[prevLang][lang]);
+
+      this.sendMessage({
+        type: 'text',
+        content: question,
+      });
     }
   }
 
