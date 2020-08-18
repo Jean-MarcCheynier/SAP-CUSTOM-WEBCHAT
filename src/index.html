@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -23,15 +24,26 @@
   </head>
 
   <body>
-    <!-- <div id="cai-webchat-div">
-    </div> -->
+    <div class="container">
+      <button id="button" class="btn btn-primary">Change Lang -> DE</button>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+      crossorigin="anonymous"></script>
     <script
       type="text/javascript"
       src="../dist/webchat.js"
-      channelId="YOUR_CHANNEL_ID"
+      channelId="858ece04-e450-47ff-ace1-9b335cbb0642"
+      token="f03dc811c05a73d1a504342bbaeb0b5b"
       token="YOUR_CHANNEL_TOKEN"
       id="cai-webchat"
     >
+    </script>
+    <script>
+      $("#button").on("click", e => {
+        CaiWebchat.setLang('de')
+      });
     </script>
     <!--
       This HTML file is a template.
