@@ -25,10 +25,19 @@ const NO_LOCALSTORAGE_MESSAGE
   },
 )
 class App extends Component {
-  state = {
-    expanded: this.props.expanded || false,
-    isReady: null,
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      expanded: this.props.expanded || false,
+      isReady: null,
+      lang: 'default',
+    }
+    this.changeLang = this.changeLang.bind(this);
+    (window.CaiWebchat = window.CaiWebchat || {}).changeLang = this.changeLang
+
   }
+
   static getDerivedStateFromProps (props, state) {
     const { isReady, preferences } = props
 
@@ -106,6 +115,11 @@ class App extends Component {
 
   componentDidCatch (error, info) {
     console.log(error, info)
+  }
+
+  changeLang (lang) {
+    console.log('Lang is %s', lang)
+    this.setState({ lang })
   }
 
   toggleChat = () => {
