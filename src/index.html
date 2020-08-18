@@ -38,6 +38,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Change Lang </button>
       </form>
+      <div class="mt-2">
+        <button id="reset-btn" type="button" class="btn btn-default">Reset</button>
+      </div>
 
 
     </div>
@@ -55,6 +58,7 @@
     >
     </script>
     <script>
+      //CUSTOM trigger change lang
       $( "#form" ).on('submit', function( event ) {
         let data =  $( this ).serializeArray();
         if(data[0] && data[0].name === "lang"){
@@ -62,6 +66,10 @@
         }
         event.preventDefault();
       });
+      $("#reset-btn").on('click', e => {
+        localStorage.clear()
+        sessionStorage.clear()
+      })
     </script>
     <!--
       This HTML file is a template.

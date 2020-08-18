@@ -95,12 +95,13 @@ class Chat extends Component {
       removeAllMessages()
       loadConversationHistoryPromise(conversationHistoryId).then(this.loadConversation)
     }
+
+      //CUSTOM change lang detection
     if( prevProps.lang !== lang ){
       let prevLang = prevProps.lang || config.conversations.defaultLang;
       console.log("Default %s", config.conversations.defaultLang)
       console.log(prevProps);
       let question = config.conversations.changeLang[prevLang].replace('%s', config.conversations.lang[prevLang][lang]);
-
       this.sendMessage({
         type: 'text',
         content: question,

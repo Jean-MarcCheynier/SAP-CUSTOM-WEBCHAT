@@ -26,6 +26,7 @@ const NO_LOCALSTORAGE_MESSAGE
 )
 class App extends Component {
 
+  //CUSTOM
   constructor (props) {
     super(props)
     this.state = {
@@ -116,6 +117,7 @@ class App extends Component {
     console.log(error, info)
   }
 
+  //CUSTOM
   changeLang (lang) {
     console.log('Lang is %s', lang);
     console.log(this.state.expanded);
